@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dbwarden-pgsql-extensions"
+version = "0.1.0"
+description = "PostgreSQL extensions management for DBWarden"
+readme = "README.md"
+requires-python = ">=3.12.7"
+dependencies = ["dbwarden>=0.15.0"]
+
+[project.urls]
+Homepage = "https://github.com/dbwarden-org/dbwarden-pgsql-extensions"
+Source = "https://github.com/dbwarden-org/dbwarden-pgsql-extensions"
+
+[project.entry-points."dbwarden.plugins"]
+pgsql_extensions = "dbwarden_pgsql_extensions:setup"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+]
