@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dbwarden-pgsql-extensions"
-version = "0.1.0"
+version = "0.1.1"
 description = "PostgreSQL extensions management for DBWarden"
 readme = "README.md"
 requires-python = ">=3.12.7"
-dependencies = ["dbwarden>=0.15.0"]
+dependencies = ["dbwarden>=0.16.0"]
 
 [project.urls]
 Homepage = "https://github.com/dbwarden-org/dbwarden-pgsql-extensions"
