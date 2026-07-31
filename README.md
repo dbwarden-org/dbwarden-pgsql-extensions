@@ -1,16 +1,25 @@
 # dbwarden-pgsql-extensions
 
+[![Python](https://img.shields.io/badge/Python-3.12.7%2B-3776AB?logo=python&logoColor=white&style=for-the-badge)](https://www.python.org/downloads/)
+[![PyPI](https://img.shields.io/pypi/v/dbwarden-pgsql-extensions?logo=pypi&logoColor=white&style=for-the-badge)](https://pypi.org/project/dbwarden-pgsql-extensions/)
+[![CI](https://img.shields.io/github/actions/workflow/status/dbwarden-org/dbwarden-pgsql-extensions/test.yml?logo=github&logoColor=white&style=for-the-badge)](https://github.com/dbwarden-org/dbwarden-pgsql-extensions/actions/workflows/test.yml)
+
 PostgreSQL extension management for [DBWarden](https://github.com/dbwarden-org/dbwarden).
 
 Declare extensions in `database_config(pg_extensions=[...])` and this plugin emits `CREATE EXTENSION` / `DROP EXTENSION` in the migration preamble, before any table that depends on them.
 
-## Object type
+## Object types
 
 | Object type | Manages |
 |---|---|
 | `pg_extension` | `CREATE EXTENSION IF NOT EXISTS` / `DROP EXTENSION IF EXISTS` |
+| `event_trigger` | `CREATE EVENT TRIGGER` / `DROP EVENT TRIGGER` |
+| `extended_statistics` | `CREATE STATISTICS` / `DROP STATISTICS` for extended statistics objects |
+| `function` | `CREATE FUNCTION` / `DROP FUNCTION`, including argument types for overload resolution |
+| `trigger` | `CREATE TRIGGER` / `DROP TRIGGER` on tables |
+| `storage_params` | Table storage parameters (fillfactor, autovacuum settings, and friends) |
 
-The handler runs in `RunPhase.PREAMBLE`, anchored after `PREAMBLE` and before `BEFORE_TABLES`, so extension-provided types are available by the time tables are created. Both directions are idempotent and reversible.
+Extension handlers run in `RunPhase.PREAMBLE`, anchored after `PREAMBLE` and before `BEFORE_TABLES`, so extension-provided types are available by the time tables are created. Both directions are idempotent and reversible.
 
 ## Usage
 
